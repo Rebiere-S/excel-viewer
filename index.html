@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page avec Iframe Dynamique</title>
+  <link rel="icon" type="image/x-icon" href="https://simon-rebiere.fr/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://simon-rebiere.fr" crossorigin="anonymous">
+</head>
+<body>
+    <iframe loading="eager"></iframe>
+
+    <script>
+        // Fonction pour extraire un paramètre spécifique de l'URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Récupérer le paramètre 'lien' de l'URL
+        var lien = getParameterByName('src');
+
+        if (lien) {
+            // Construire la valeur src de l'iframe
+            var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
+            var iframeSrc = baseUrl + encodeURIComponent(lien);
+
+            // Définir la valeur src de l'iframe
+            document.getElementById('myIframe').src = iframeSrc;
+        } else {
+            console.error('Aucun lien trouvé dans l\'URL');
+        }
+    </script>
+</body>
+</html>
