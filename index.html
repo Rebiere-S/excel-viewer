@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://simon-rebiere.fr" crossorigin="anonymous">
 </head>
 <body>
-    <iframe loading="eager"></iframe>
+    <iframe id="iframe" loading="eager"></iframe>
 
     <script>
         // Fonction pour extraire un paramètre spécifique de l'URL
@@ -32,7 +32,7 @@
             var iframeSrc = baseUrl + encodeURIComponent(lien);
 
             // Définir la valeur src de l'iframe
-            document.getElementById('myIframe').src = iframeSrc;
+            document.getElementById('iframe').src = iframeSrc;
         } else {
             console.error('Aucun lien trouvé dans l\'URL');
         }
