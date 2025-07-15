@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <iframe id="iframe" loading="eager"></iframe>
+    <iframe id="myIframe" allowfullscreen></iframe>
 
     <script>
         // Fonction pour extraire un paramètre spécifique de l'URL
@@ -22,18 +22,14 @@
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        // Récupérer le paramètre 'lien' de l'URL
-        var lien = getParameterByName('src');
+        // Récupérer le paramètre 'src' de l'URL
+        var src = getParameterByName('src');
 
-        if (lien) {
-            // Construire la valeur src de l'iframe
-            var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
-            var iframeSrc = baseUrl + encodeURIComponent(lien);
-
-            // Définir la valeur src de l'iframe
-            document.getElementById('iframe').src = iframeSrc;
+        if (src) {
+            // Définir la valeur src de l'iframe avec l'URL extraite
+            document.getElementById('myIframe').src = src;
         } else {
-            console.error('Aucun lien trouvé dans l\'URL');
+            console.error('Aucun paramètre "src" trouvé dans l\'URL');
         }
     </script>
 </body>
