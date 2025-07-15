@@ -28,7 +28,7 @@
         if (src) {
             // Construire la valeur src de l'iframe
             var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
-            var iframeSrc = baseUrl + encodeURIComponent(lien);
+            var iframeSrc = baseUrl + encodeURIComponent(src);
             
             // Définir la valeur src de l'iframe avec l'URL extraite
             document.getElementById('myIframe').src = iframeSrc;
