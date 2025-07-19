@@ -1,14 +1,98 @@
+:root {
+  --background-color: #ecf0f1;
+  --transparent-background-color: #ecf0f1cc;
+  --shadow-color: #7f8c8d;
+
+  --white: #ffffff;
+  --light-grey: #bdc3c7;
+  --grey: #95a5a6;
+  --dark-grey: #7f8c8d;
+
+  --tooltip-color: #000000cc;
+
+  --light-text-color: #34495e;
+  --dark-text-color: #2c3e50;
+
+
+  --title-line-height: 1.2;
+  --text-line-height: 1.5;
+  --h1-font-size: 2em;
+  --h1-font-weight: 500;
+  --h2-font-size: 1.6em;
+  --h2-font-weight: 400;
+  --h3-font-size: 1.2em;
+  --h3-font-weight: 400;
+  --other-fonts-size: 1em;
+  --other-fonts-weight: 300;
+
+
+  --landscape-section-width: 65vw;
+  --portrait-section-width: 90vw;
+
+
+  --tooltip-arrow-size: 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
+  list-style: none;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+h1, h2, h3, p, label, input, output, textarea, ::placeholder {
+  line-height: var(--title-line-height);
+  user-select: none;
+  color: var(--dark-text-color);
+  text-shadow: 1px 1px 1px var(--shadow-color);
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+  font-weight: var(--h3-font-weight);
+}
+
+p, label, input, textarea, ::placeholder, output {
+  line-height: var(--text-line-height);
+  font-size: var(--other-fonts-size);
+  font-weight: var(--other-fonts-weight);
 }
 
 body {
+  display: flex;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
+  background-color: var(--background-color);
+  top: 0;
+  left: 0;
 }
 
-iframe {
+#myIframe {
+  display: none;
   width: 100%;
   height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
 }
