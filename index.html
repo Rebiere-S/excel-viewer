@@ -32,6 +32,9 @@
             
             // Définir la valeur src de l'iframe avec l'URL extraite
             document.getElementById('myIframe').src = iframeSrc;
+
+            // Afficher l'iFrame
+            document.getElementById('myIframe').style.display = 'flex';
         } else {
             console.error('Aucun paramètre "src" trouvé dans l\'URL');
         }
