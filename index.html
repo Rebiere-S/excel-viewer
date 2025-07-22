@@ -8,36 +8,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <iframe id="myIframe" allowfullscreen></iframe>
+  <noscript>
+    <div id="noJS-modal-overlay">
+      <div class="noJS-modal">
+        <h2>JavaScript est désactivé</h2>
+        <p>Pour consulter cette page, veuillez activer JavaScript dans votre navigateur.</p>
+        <button class="close-button" onclick="document.querySelector('#noJS-modal-overlay').style.display='none'">╳</button>
+      </div>
+    </div>
+  </noscript>
+  <iframe id="myIframe" allowfullscreen></iframe>
+  <script>
+    // Fonction pour extraire un paramètre spécifique de l'URL
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
 
-    <script>
-        // Fonction pour extraire un paramètre spécifique de l'URL
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
+    // Récupérer le paramètre 'src' de l'URL
+    var src = getParameterByName('src');
 
-        // Récupérer le paramètre 'src' de l'URL
-        var src = getParameterByName('src');
-
-        if (src) {
-            // Construire la valeur src de l'iframe
-            var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
-            var iframeSrc = baseUrl + encodeURIComponent(src);
+    if (src) {
+      // Construire la valeur src de l'iframe
+      var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
+      var iframeSrc = baseUrl + encodeURIComponent(src);
             
-            // Définir la valeur src de l'iframe avec l'URL extraite
-            document.getElementById('myIframe').src = iframeSrc;
+      // Définir la valeur src de l'iframe avec l'URL extraite
+      document.getElementById('myIframe').src = iframeSrc;
 
-            // Afficher l'iFrame
-            document.getElementById('myIframe').style.display = 'flex';
-        } else {
-            console.error('Aucun paramètre "src" trouvé dans l\'URL');
-        }
-    </script>
+      // Afficher l'iFrame
+      document.getElementById('myIframe').style.display = 'flex';
+    } else {
+      console.error('Aucun paramètre "src" trouvé dans l\'URL');
+    }
+  </script>
 </body>
 </html>
