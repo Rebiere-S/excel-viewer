@@ -109,7 +109,7 @@ body {
   max-width: 90vw;
   max-height: 90vh;
   padding: 15px 30px;
-  padding-top: calc(5px + 3em);
+  padding-top: 3em;
   border-radius: 5px;
   text-align: center;
   background-color: var(--tooltip-color);
@@ -122,6 +122,7 @@ body {
 
 #viewer-modal {
   visibility: hidden;
+  backdrop-filter: blur(3px);
   position: fixed;
 }
 
