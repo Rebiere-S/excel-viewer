@@ -6,6 +6,7 @@
   --white: #ffffff;
   --light-grey: #bdc3c7;
   --grey: #95a5a6;
+  --transparent-grey: #95a5a664;
   --dark-grey: #7f8c8d;
 
   --tooltip-color: #000000cc;
@@ -96,12 +97,12 @@ body {
   z-index: 1000;
 }
 
-#noJS-modal {
+#noJS-modal,
+#viewer-modal {
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  overflow-y: scroll;
   max-width: 80%;
-  height: auto;
+  max-height: 80%;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
@@ -125,9 +126,19 @@ body {
   text-shadow: none;
 }
 
-#noJS-modal .close-button {
+#viewer-modal h1 {
+  text-wrap: balance;
+  color: var(--white);
+  text-shadow: none;
+}
+
+#noJS-modal .close-button,
+#viewer-modal .close-button{
   display: flex;
-  padding: 10px 20px;
+  width: 5em;
+  height: 3em;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   font-size: 0.7em;
   font-weight: bold;
@@ -138,9 +149,10 @@ body {
   cursor: pointer;
 }
 
-#noJS-modal .close-button:hover {
+#noJS-modal .close-button:hover,
+#viewer-modal .close-button:hover {
   border-radius: 0 0 0 5px;
-  background-color: var(--grey);
+  background-color: var(--transparent-grey);
   font-weight: bold;
   text-shadow: 0px 0px 1px var(--light-text-color);
 }
