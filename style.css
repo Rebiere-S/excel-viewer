@@ -110,7 +110,7 @@ body {
   max-width: 90vw;
   height: auto;
   padding: 15px 30px;
-  padding-top: 3em;
+  padding-top: calc(3em - 15px + 5px);
   border-radius: 5px;
   text-align: center;
   background-color: var(--tooltip-color);
