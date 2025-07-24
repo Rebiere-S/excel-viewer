@@ -85,6 +85,10 @@ body {
   left: 0;
 }
 
+.icon path {
+  stroke: var(--white);
+}
+
 #noJS-modal-overlay {
   display: flex;
   width: 100%;
@@ -103,7 +107,8 @@ body {
   overflow-y: scroll;
   max-width: 80%;
   max-height: 80%;
-  padding: 20px;
+  padding: 15px 30px;
+  padding-right: calc(5px + 5em);
   border-radius: 5px;
   text-align: center;
   background-color: var(--tooltip-color);
@@ -111,6 +116,16 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#viewer-modal {
+  display: none;
+}
+
+#viewer-modal h3 {
+  line-height: var(--text-line-height);
+  color: var(--white);
+  text-shadow: none;
 }
 
 #noJS-modal h2 {
@@ -121,19 +136,12 @@ body {
 }
 
 #noJS-modal p {
-  line-height: 1.2;
+  line-height: var(--text-line-height);
   color: var(--white);
   text-shadow: none;
 }
 
-#viewer-modal h1 {
-  text-wrap: balance;
-  color: var(--white);
-  text-shadow: none;
-}
-
-#noJS-modal .close-button,
-#viewer-modal .close-button{
+.close-button {
   display: flex;
   width: 5em;
   height: 3em;
@@ -149,8 +157,7 @@ body {
   cursor: pointer;
 }
 
-#noJS-modal .close-button:hover,
-#viewer-modal .close-button:hover {
+.close-button:hover {
   border-radius: 0 0 0 5px;
   background-color: var(--transparent-grey);
   font-weight: bold;
@@ -192,6 +199,6 @@ body {
 
 #download-button .icon {
   height: 2em;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
 }
