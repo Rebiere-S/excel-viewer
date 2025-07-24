@@ -104,6 +104,7 @@ body {
 #noJS-modal,
 #viewer-modal {
   display: flex;
+  flex-direction: column;
   overflow-y: scroll;
   max-width: 80%;
   max-height: 80%;
