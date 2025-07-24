@@ -106,8 +106,9 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  min-width: 350px;
   max-width: 90vw;
-  max-height: 90vh;
+  height: auto;
   padding: 15px 30px;
   padding-top: 3em;
   border-radius: 5px;
