@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Excel file viewer</title>
+  <title>Visionneuse Excel</title>
   <link rel="icon" type="image/x-icon" href="https://simon-rebiere.fr/favicon.ico">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
       </div>
     </div>
   </noscript>
-  <iframe id="myIframe" allowfullscreen></iframe>
+  <iframe id="viewer" allowfullscreen></iframe>
   <script>
     // Fonction pour extraire un paramètre spécifique de l'URL
     function getParameterByName(name, url) {
@@ -38,15 +38,17 @@
     var src = getParameterByName('src');
 
     if (src) {
+      var viewer = document.getElementById('viewer');
+      
       // Construire la valeur src de l'iframe
       var baseUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=';
       var iframeSrc = baseUrl + encodeURIComponent(src);
-            
+      
       // Définir la valeur src de l'iframe avec l'URL extraite
-      document.getElementById('myIframe').src = iframeSrc;
+      viewer.src = iframeSrc;
 
       // Afficher l'iFrame
-      document.getElementById('myIframe').style.display = 'flex';
+      viewer.style.display = 'flex';
     } else {
       console.error('Aucun paramètre "src" trouvé dans l\'URL');
     }
