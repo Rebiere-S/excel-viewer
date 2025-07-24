@@ -106,10 +106,10 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 90vw;
+  max-height: 90vh;
   padding: 15px 30px;
-  padding-right: calc(5px + 5em);
+  padding-top: calc(5px + 3em);
   border-radius: 5px;
   text-align: center;
   background-color: var(--tooltip-color);
@@ -122,6 +122,7 @@ body {
 
 #viewer-modal {
   visibility: hidden;
+  position: fixed;
 }
 
 #viewer-modal h3 {
