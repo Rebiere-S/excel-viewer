@@ -21,7 +21,19 @@
       </div>
     </div>
   </noscript>
+  <div id="viewer-modal">
+    <button class="close-button" onclick="document.querySelector('#viewer-modal').style.display='none'">╳</button>
+    <h3>Cette page n'est qu'une visionneuse de fichier Excel. Vous ne pouvez donc pas tester le fichier d'origine. Pour ce faire, vous devez télécharger le fichier à l'aide du bouton en bas à droite de cette page.</h3>
+  </div>
   <iframe id="viewer" allowfullscreen></iframe>
+  <div id="download-button">
+    <button onclick="downloadFile()"/>
+    <svg class="icon download-icon" viewBox="0 0 24 24">
+      <g>
+        <path d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
   <script>
     // Fonction pour extraire un paramètre spécifique de l'URL
     function getParameterByName(name, url) {
@@ -51,6 +63,17 @@
       viewer.style.display = 'flex';
     } else {
       console.error('Aucun paramètre "src" trouvé dans l\'URL');
+    }
+
+    // Fonction pour télécharger le fichier Excel
+    function downloadFile() {
+      if (src) {
+        const lien = document.createElement('a');
+        lien.href = src;
+        document.body.appendChild(lien);
+        lien.click();
+        document.body.removeChild(lien);
+      }
     }
   </script>
 </body>
