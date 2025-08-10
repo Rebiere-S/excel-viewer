@@ -107,7 +107,6 @@ body {
 #viewer-modal {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   min-width: 350px;
   max-width: 90vw;
   height: auto;
@@ -216,4 +215,5 @@ body {
     height: var(--touch-devices-button-height);
   }
 }
+
 
