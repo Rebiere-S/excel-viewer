@@ -213,7 +213,9 @@ body {
   margin: 15px;
   @media only screen and (orientation: portrait), (max-width: 800px) {
     height: var(--touch-devices-button-height);
+    margin: 5px;
   }
 }
+
 
 
