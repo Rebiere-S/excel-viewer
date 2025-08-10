@@ -26,6 +26,8 @@
   --other-fonts-size: 1em;
   --other-fonts-weight: 300;
 
+  --desktop-button-height: 12mm;
+  --touch-devices-button-height: 11mm;
 
   --tooltip-arrow-size: 10px;
 }
@@ -186,9 +188,13 @@ body {
   background-color: var(--tooltip-color);
   backdrop-filter: blur(3px);
   position: fixed;
-  right: 30px;
-  bottom: 30px;
+  right: 3vh;
+  bottom: 3vh;
   z-index: 100;
+  @media only screen and (orientation: portrait), (max-width: 800px) {
+    right: 3vw;
+    bottom: 3vw;
+  }
 }
 
 #download-button button {
@@ -204,6 +210,10 @@ body {
 }
 
 #download-button .icon {
-  height: 2em;
+  height: var(--desktop-button-height);
   margin: 15px;
+  @media only screen and (orientation: portrait), (max-width: 800px) {
+    height: var(--touch-devices-button-height);
+  }
 }
+
