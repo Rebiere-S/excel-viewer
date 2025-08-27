@@ -211,11 +211,13 @@ body {
 #download-button .icon {
   height: var(--desktop-button-height);
   margin: 15px;
+  color: var(--dark-text-color);
   @media only screen and (orientation: portrait), (max-width: 800px) {
     height: var(--touch-devices-button-height);
     margin: 10px;
   }
 }
+
 
 
 
