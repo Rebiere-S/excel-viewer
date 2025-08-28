@@ -62,28 +62,27 @@
       } else {
         console.error('Aucun paramètre "src" trouvé dans l\'URL');
       }
-    });
 
 
-    //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
-    function downloadFile() {
-      if (src) {
-        const lien = document.createElement('a');
-        lien.href = src;
-        document.body.appendChild(lien);
-        lien.click();
-        document.body.removeChild(lien);
+      //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
+      function downloadFile() {
+        if (src) {
+          const lien = document.createElement('a');
+          lien.href = src;
+          document.body.appendChild(lien);
+          lien.click();
+          document.body.removeChild(lien);
+        }
       }
-    }
 
 
-    //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
-    document.addEventListener("DOMContentLoaded", function () {
+      //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
       document.getElementById('viewer-modal').style.visibility = 'visible';
     });
   </script>
 </body>
 </html>
+
 
 
 
