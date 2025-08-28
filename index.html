@@ -45,17 +45,17 @@
 
     document.addEventListener("DOMContentLoaded", function () {
       // Récupérer le paramètre 'src' de l'URL
-      var src = getParameterByName('src');
+      var source = getParameterByName('src');
 
-      if (src) {
+      if (source) {
         var viewer = document.getElementById('viewer');
       
         // Construire la valeur src de l'iframe
         var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
-        var iframeSrc = baseUrl + encodeURIComponent(src);
+        var iframeSource = baseUrl + encodeURIComponent(source);
       
         // Définir la valeur src de l'iframe avec l'URL extraite
-        viewer.src = iframeSrc;
+        viewer.src = iframeSource;
 
         // Afficher l'iFrame
         viewer.style.display = 'flex';
@@ -66,12 +66,12 @@
 
       //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
       function downloadFile() {
-        if (src) {
-          const lien = document.createElement('a');
-          lien.href = src;
-          document.body.appendChild(lien);
-          lien.click();
-          document.body.removeChild(lien);
+        if (source) {
+          const link = document.createElement('a');
+          link.href = source;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
       }
 
@@ -82,6 +82,7 @@
   </script>
 </body>
 </html>
+
 
 
 
