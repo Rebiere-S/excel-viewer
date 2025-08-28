@@ -31,6 +31,7 @@
     <svg class="icon download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
   </div>
   <script>
+    //LOGIQUE DE RECUPERATION DES INFORMATIONS DANS L'URL ET DE CHARGEMENT DANS L'IFRAME DE LA VISIONNEUSE
     // Fonction pour extraire un paramètre spécifique de l'URL
     function getParameterByName(name, url) {
       if (!url) url = window.location.href;
@@ -42,26 +43,29 @@
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    // Récupérer le paramètre 'src' de l'URL
-    var src = getParameterByName('src');
+    document.addEventListener("DOMContentLoaded", function () {
+      // Récupérer le paramètre 'src' de l'URL
+      var src = getParameterByName('src');
 
-    if (src) {
-      var viewer = document.getElementById('viewer');
+      if (src) {
+        var viewer = document.getElementById('viewer');
       
-      // Construire la valeur src de l'iframe
-      var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
-      var iframeSrc = baseUrl + encodeURIComponent(src);
+        // Construire la valeur src de l'iframe
+        var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
+        var iframeSrc = baseUrl + encodeURIComponent(src);
       
-      // Définir la valeur src de l'iframe avec l'URL extraite
-      viewer.src = iframeSrc;
+        // Définir la valeur src de l'iframe avec l'URL extraite
+        viewer.src = iframeSrc;
 
-      // Afficher l'iFrame
-      viewer.style.display = 'flex';
-    } else {
-      console.error('Aucun paramètre "src" trouvé dans l\'URL');
-    }
+        // Afficher l'iFrame
+        viewer.style.display = 'flex';
+      } else {
+        console.error('Aucun paramètre "src" trouvé dans l\'URL');
+      }
+    });
 
-    // Fonction pour télécharger le fichier Excel
+
+    //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
     function downloadFile() {
       if (src) {
         const lien = document.createElement('a');
@@ -72,11 +76,15 @@
       }
     }
 
-    // Affichage de la fenêtre indiquant les limitations de la visionneuse lorsque JS est activé
-    document.getElementById('viewer-modal').style.visibility = 'visible';
+
+    //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById('viewer-modal').style.visibility = 'visible';
+    });
   </script>
 </body>
 </html>
+
 
 
 
