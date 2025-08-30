@@ -43,45 +43,46 @@
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
+    // Récupérer le paramètre 'src' de l'URL
+    var src = getParameterByName('src');
+
+    if (src) {
+      var viewer = document.getElementById('viewer');
+      
+      // Construire la valeur src de l'iframe
+      var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
+      var iframeSrc = baseUrl + encodeURIComponent(src);
+      
+      // Définir la valeur src de l'iframe avec l'URL extraite
+      viewer.src = iframeSrc;
+
+      // Afficher l'iFrame
+      viewer.style.display = 'flex';
+    } else {
+      console.error('Aucun paramètre "src" trouvé dans l\'URL');
+    }
+
+
+    //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
+    function downloadFile() {
+      if (src) {
+        const lien = document.createElement('a');
+        lien.href = src;
+        document.body.appendChild(lien);
+        lien.click();
+        document.body.removeChild(lien);
+      }
+    }
+
+
+    //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
     document.addEventListener("DOMContentLoaded", function () {
-      // Récupérer le paramètre 'src' de l'URL
-      var source = getParameterByName('src');
-
-      if (source) {
-        var viewer = document.getElementById('viewer');
-      
-        // Construire la valeur src de l'iframe
-        var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
-        var iframeSource = baseUrl + encodeURIComponent(source);
-      
-        // Définir la valeur src de l'iframe avec l'URL extraite
-        viewer.src = iframeSource;
-
-        // Afficher l'iFrame
-        viewer.style.display = 'flex';
-      } else {
-        console.error('Aucun paramètre "src" trouvé dans l\'URL');
-      }
-
-
-      //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
-      function downloadFile() {
-        if (source) {
-          const link = document.createElement('a');
-          link.href = source;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-      }
-
-
-      //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
       document.getElementById('viewer-modal').style.visibility = 'visible';
     });
   </script>
 </body>
 </html>
+
 
 
 
