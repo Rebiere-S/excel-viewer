@@ -184,7 +184,7 @@ body {
   display: flex;
   overflow: hidden;
   border-radius: 5px;
-  background-color: var(--tooltip-color);
+  background-color: var(--background-color);
   backdrop-filter: blur(3px);
   position: fixed;
   right: 3vh;
@@ -217,6 +217,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
