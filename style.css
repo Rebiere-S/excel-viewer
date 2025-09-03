@@ -75,6 +75,12 @@ p, label, input, textarea, ::placeholder, output {
   font-weight: var(--other-fonts-weight);
 }
 
+
+a {
+  cursor: url(https://raw.githubusercontent.com/Rebiere-S/excel-viewer/refs/heads/main/assets/cursors/pointer.png) 6 0, pointer;
+}
+
+
 body {
   display: flex;
   overflow: hidden;
@@ -85,6 +91,7 @@ body {
   background-color: var(--background-color);
   top: 0;
   left: 0;
+  cursor: url(https://raw.githubusercontent.com/Rebiere-S/excel-viewer/refs/heads/main/assets/cursors/default.png), default;
 }
 
 #noJS-modal-overlay {
@@ -214,6 +221,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
