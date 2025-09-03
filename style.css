@@ -187,7 +187,7 @@ body {
   display: flex;
   overflow: hidden;
   border-radius: 5px;
-  background-color: var(--background-color);
+  background-color: var(--transparent-background-color);
   backdrop-filter: blur(3px);
   box-shadow:  8px 8px 12px -2px var(--shadow-color);
   position: fixed;
@@ -221,6 +221,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
