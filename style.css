@@ -76,7 +76,7 @@ p, label, input, textarea, ::placeholder, output {
 }
 
 
-a {
+button {
   cursor: url(https://raw.githubusercontent.com/Rebiere-S/excel-viewer/refs/heads/main/assets/cursors/pointer.png) 6 0, pointer;
 }
 
@@ -221,6 +221,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
