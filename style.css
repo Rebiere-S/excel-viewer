@@ -182,6 +182,7 @@ body {
   border-radius: 5px;
   background-color: var(--background-color);
   backdrop-filter: blur(3px);
+  box-shadow:  8px 8px 12px -2px var(--shadow-color);
   position: fixed;
   right: 3vh;
   bottom: 3vh;
@@ -213,6 +214,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
