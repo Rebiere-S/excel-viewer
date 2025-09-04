@@ -125,6 +125,10 @@ body {
   z-index: 100;
 }
 
+#viewer-modal {
+  display: none;
+}
+
 .modal h3 {
   line-height: var(--text-line-height);
   color: var(--white);
@@ -217,17 +221,3 @@ body {
     margin: 10px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
