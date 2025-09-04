@@ -13,26 +13,38 @@
 </head>
 <body>
   <noscript>
-    <div id="noJS-modal-overlay">
-      <div id="noJS-modal">
+    <div class="modal-overlay">
+      <div id="noJS-modal" class="modal">
         <h2>JavaScript est désactivé</h2>
-        <p>Pour consulter cette page, veuillez activer JavaScript dans votre navigateur.</p>
+        <h3>Cette page necessite JavaScript pour fonctionner, veuillez l'activer dans votre navigateur.</h3>
+        <p>Pour plus d'informations sur comment activer JavaScript, veuillez cliquer </p><p class="underlined"><a href="https://www.enable-javascript.com" title="Aller à la page d'aide">ICI</a></p><p>.</p>
         <button class="close-button" aria-label="Close" onclick="this.parentElement.style.display='none'">╳</button>
       </div>
     </div>
   </noscript>
-  <div id="viewer-modal">
+  <div id="viewer-modal" class="modal">
     <button class="close-button" aria-label="Close" onclick="this.parentElement.style.display='none'">╳</button>
     <h3>Cette page n'est qu'une visionneuse de fichiers Excel. Vous ne pouvez donc pas tester le fichier d'origine en tant que tel. Pour ce faire, vous pouvez télécharger le fichier à l'aide du bouton en bas à droite de cette page ou modifier une copie.</h3>
   </div>
-  <iframe id="viewer" allowfullscreen></iframe>
+  <div id="error-modal-overlay" class="modal-overlay">
+    <div id="error-modal" class="modal">
+      <button class="close-button" aria-label="Close" onclick="this.parentElement.style.display='none'">╳</button>
+      <h3 id="error-message"></h3>
+    </div>
+  </div>
+  <iframe id="viewer" src="about:blank"></iframe>
   <div id="download-button">
     <button aria-label="Download" onclick="downloadFile()"/>
     <svg class="icon download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
   </div>
   <script>
     //LOGIQUE DE RECUPERATION DES INFORMATIONS DANS L'URL ET DE CHARGEMENT DANS L'IFRAME DE LA VISIONNEUSE
-    // Fonction pour extraire un paramètre spécifique de l'URL
+    //Récupérer le paramètre 'src' (source) de l'URL
+    var src = getParameterByName('src');
+    //Récupérer le paramètre 'vwr' (viewer) de l'URL
+    var vwr = getParameterByName('vwr');
+
+    //Fonction pour extraire un paramètre spécifique de l'URL
     function getParameterByName(name, url) {
       if (!url) url = window.location.href;
       name = name.replace(/[\[\]]/g, '\\$&');
@@ -43,25 +55,61 @@
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    // Récupérer le paramètre 'src' de l'URL
-    var src = getParameterByName('src');
 
-    if (src) {
-      var viewer = document.getElementById('viewer');
+    document.addEventListener("DOMContentLoaded", function () {
+      const viewer = document.getElementById('viewer');
+
+      if (viewer) {
+        if (src) {
+          //Afficher le bouton de téléchargement du fichier source
+          document.getElementById('download-button').style.display = 'flex';
+        }
       
-      // Construire la valeur src de l'iframe
-      var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
-      var iframeSrc = baseUrl + encodeURIComponent(src);
-      
-      // Définir la valeur src de l'iframe avec l'URL extraite
-      viewer.src = iframeSrc;
+        if (vwr) {
+          //Construire la valeur src de l'iframe pour afficher la visionneuse
+          var iframeSrc = encodeURIComponent(vwr);
 
-      // Afficher l'iFrame
-      viewer.style.display = 'flex';
-    } else {
-      console.error('Aucun paramètre "src" trouvé dans l\'URL');
-    }
+          //Définir la valeur src de l'iframe avec l'URL extraite
+          viewer.src = iframeSrc;
 
+          //Affiche un message d'erreur si l'url est invalide
+          viewer.onerror = function() {
+            const errorMessage = document.getElementById('error-message');
+
+            errorMessage.textContent = "Erreur de chargement du contenu : l'url de la visionneuse est invalide.";
+            errorMessage.style.display = 'flex';
+          };
+        } else if (src) {
+          //Construire la valeur src de l'iframe pour afficher la source
+          var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
+          var iframeSrc = baseUrl + encodeURIComponent(src);
+
+          //Définir la valeur src de l'iframe avec l'URL extraite
+          viewer.src = iframeSrc;
+
+          //Affiche le message des limitations de la visionneuse
+          iframe.onload = function() {
+            document.getElementById('viewer-modal').style.display = 'flex';
+          };
+
+          //Affiche un message d'erreur si l'url est invalide
+          viewer.onerror = function() {
+            const errorMessage = document.getElementById('error-message');
+
+            errorMessage.textContent = "Erreur de chargement du contenu : l'url du fichier est invalide.";
+            errorMessage.style.display = 'flex';
+          };
+        } else {
+          console.error('Aucun paramètre "src" trouvé dans l\'URL');
+        }
+      } else {
+        //Affiche un message d'erreur si les iframes ne sont pas disponibles
+        const errorMessage = document.getElementById('error-message');
+
+        errorMessage.textContent = "Les iFrames ne sont pas supportées ou sont désactivées dans votre navigateur.";
+        errorMessage.style.display = 'flex';
+      }
+    });
 
     //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
     function downloadFile() {
@@ -73,15 +121,10 @@
         document.body.removeChild(lien);
       }
     }
-
-
-    //LOGIQUE D'AFFICHAGE DE LA FENÊTRE INDIQUANT LES LIMITATIONS DE LA VISIONNEUSE LORSQUE JS EST ACTIVÉ
-    document.addEventListener("DOMContentLoaded", function () {
-      document.getElementById('viewer-modal').style.visibility = 'visible';
-    });
   </script>
 </body>
 </html>
+
 
 
 
