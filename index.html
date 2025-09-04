@@ -41,8 +41,10 @@
     //LOGIQUE DE RECUPERATION DES INFORMATIONS DANS L'URL ET DE CHARGEMENT DANS L'IFRAME DE LA VISIONNEUSE
     //Récupérer le paramètre 'src' (source) de l'URL
     var src = getParameterByName('src');
+	console.log(src);   //A SUPPRIMER - DEBUG
     //Récupérer le paramètre 'vwr' (viewer) de l'URL
     var vwr = getParameterByName('vwr');
+	console.log(vwr);   //A SUPPRIMER - DEBUG
 
     //Fonction pour extraire un paramètre spécifique de l'URL
     function getParameterByName(name, url) {
@@ -55,61 +57,66 @@
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", async function () {
       const viewer = document.getElementById('viewer');
-
-      if (viewer) {
-        if (src) {
-          //Afficher le bouton de téléchargement du fichier source
-          document.getElementById('download-button').style.display = 'flex';
-        }
-      
-        if (vwr) {
-          //Construire la valeur src de l'iframe pour afficher la visionneuse
-          var iframeSrc = encodeURIComponent(vwr);
-
-          //Définir la valeur src de l'iframe avec l'URL extraite
-          viewer.src = iframeSrc;
-
-          //Affiche un message d'erreur si l'url est invalide
-          viewer.onerror = function() {
-            const errorMessage = document.getElementById('error-message');
-
-            errorMessage.textContent = "Erreur de chargement du contenu : l'url de la visionneuse est invalide.";
-            errorMessage.style.display = 'flex';
-          };
-        } else if (src) {
-          //Construire la valeur src de l'iframe pour afficher la source
-          var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
-          var iframeSrc = baseUrl + encodeURIComponent(src);
-
-          //Définir la valeur src de l'iframe avec l'URL extraite
-          viewer.src = iframeSrc;
-
-          //Affiche le message des limitations de la visionneuse
-          iframe.onload = function() {
-            document.getElementById('viewer-modal').style.display = 'flex';
-          };
-
-          //Affiche un message d'erreur si l'url est invalide
-          viewer.onerror = function() {
-            const errorMessage = document.getElementById('error-message');
-
-            errorMessage.textContent = "Erreur de chargement du contenu : l'url du fichier est invalide.";
-            errorMessage.style.display = 'flex';
-          };
-        } else {
-          console.error('Aucun paramètre "src" trouvé dans l\'URL');
-        }
-      } else {
+      if (!viewer) {
         //Affiche un message d'erreur si les iframes ne sont pas disponibles
-        const errorMessage = document.getElementById('error-message');
+        document.getElementById('error-message').textContent = "Les iFrames ne sont pas supportées ou sont désactivées dans votre navigateur.";
+        document.getElementById('error-modal-overlay').style.display = 'flex';
 
-        errorMessage.textContent = "Les iFrames ne sont pas supportées ou sont désactivées dans votre navigateur.";
-        errorMessage.style.display = 'flex';
+		return;
+      }
+
+      //Vérification de l'accessibilité des URLs
+      let srcAccessibility = false;
+      let vwrAccessibility = false;
+
+      if (src) {
+        srcAccessibility = await checkUrlAccessibility(src);
+      }
+      if (vwr) {
+        vwrAccessibility = await checkUrlAccessibility(vwr);
+      }
+
+      //Afficher le bouton de téléchargement du fichier source si src est accessible
+      if (srcAccessibility) {
+        document.getElementById('download-button').style.display = 'flex';
+      }
+
+      //Logique de chargement de l'iframe en fonction des résultats
+      if (vwrAccessibility) {
+        //Construire la valeur src de l'iframe pour afficher la visionneuse
+        viewer.src = vwr;   //viewer.src = encodeURIComponent(vwr);
+      } else if (srcAccessibility) {
+        //Construire la valeur src de l'iframe pour afficher la source
+        var baseUrl = 'https://view.officeapps.live.com/op/view.aspx?src=';
+        viewer.src = baseUrl + encodeURIComponent(src);
+        //Affiche le message des limitations de la visionneuse
+        document.getElementById('viewer-modal').style.display = 'flex';
+      } else {
+        //Affiche un message d'erreur si aucun paramètre src valide n'est trouvé
+        document.getElementById('error-message').textContent = 'Aucun fichier source valide trouvé dans les paramètres de l\'URL';
+        document.getElementById('error-modal-overlay').style.display = 'flex';
       }
     });
+
+    //Fonction asynchrone pour vérifier l'accessibilité d'une URL
+    async function checkUrlAccessibility(url) {
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          mode: 'no-cors', // Si CORS est un problème
+          headers: {
+            'Accept': '*/*',
+          }
+        });
+        return response.ok || response.type === 'opaque'; // 'opaque' si mode 'no-cors'
+      } catch (error) {
+        console.error("Erreur lors de la vérification de l'URL :", error.message);
+        return false;
+      }
+    }
+
 
     //LOGIQUE DU BOUTON DE TELECHARGEMENT DU FICHIER SOURCE
     function downloadFile() {
@@ -124,14 +131,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
