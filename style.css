@@ -94,8 +94,8 @@ body {
   /*cursor: url(https://raw.githubusercontent.com/Rebiere-S/excel-viewer/refs/heads/main/assets/cursors/default.png), default;*/
 }
 
-#noJS-modal-overlay {
-  display: flex;
+.modal-overlay {
+  display: none;
   width: 100%;
   height: 100%;
   background-color: var(--transparent-background-color);
@@ -106,8 +106,7 @@ body {
   z-index: 1000;
 }
 
-#noJS-modal,
-#viewer-modal {
+.modal {
   display: flex;
   flex-direction: column;
   min-width: 350px;
@@ -118,6 +117,7 @@ body {
   border-radius: 5px;
   text-align: center;
   background-color: var(--tooltip-color);
+  backdrop-filter: blur(3px);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -125,26 +125,20 @@ body {
   z-index: 100;
 }
 
-#viewer-modal {
-  visibility: hidden;
-  backdrop-filter: blur(3px);
-  position: fixed;
-}
-
-#viewer-modal h3 {
+.modal h3 {
   line-height: var(--text-line-height);
   color: var(--white);
   text-shadow: none;
 }
 
-#noJS-modal h2 {
+.-modal h2 {
   margin-bottom: 15px;
   text-wrap: balance;
   color: var(--white);
   text-shadow: none;
 }
 
-#noJS-modal p {
+.modal p {
   line-height: var(--text-line-height);
   color: var(--white);
   text-shadow: none;
@@ -173,6 +167,7 @@ body {
   text-shadow: 0px 0px 1px var(--light-text-color);
 }
 
+
 #viewer {
   display: flex;
   width: 100%;
@@ -183,8 +178,9 @@ body {
   z-index: 1;
 }
 
+
 #download-button {
-  display: flex;
+  display: none;
   overflow: hidden;
   border-radius: 5px;
   background-color: var(--transparent-background-color);
@@ -221,6 +217,7 @@ body {
     margin: 10px;
   }
 }
+
 
 
 
